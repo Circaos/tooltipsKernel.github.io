@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/transmisionDocumento3.css">
+    <title>Transferencia de Archivos</title>
+</head>
+<body>
+    <h1>Transferencia de Archivos</h1>
+    
+    <div class="button-container">
+        <button class="main-btn" id="uploadBtn">Enviar Archivos</button>
+        <button class="main-btn download" id="downloadBtn">Descargar Archivos</button>
+    </div>
+    
+    <!-- Sección para enviar archivos -->
+    <div class="upload-section" id="uploadSection">
+        <div class="drop-area" id="dropArea">
+            <p>Arrastra y suelta tus archivos aquí</p>
+            <p>o</p>
+            <button class="upload-btn" id="selectFilesBtn">Seleccionar Archivos</button>
+            <input type="file" id="fileInput" multiple>
+            <div class="file-info">
+                Máximo 10 archivos, 40MB por cada archivo
+            </div>
+        </div>
+
+        <div class="divAcortador" id="divAcortador">
+            <p>El código de sus archivos es:</p>
+            <div class="divCodigoAcortador">
+                <p id="CodigoAcortador">CODIGO000</p>
+                <button id="btnCopiarAcortador">copiar 📋</button>
+            </div>
+        </div>
+        
+        <div class="selected-files" id="selectedFiles"></div>
+        
+        <button class="upload-btn" id="uploadFilesBtn" disabled>Cargar Archivos</button>
+        <div class="error" id="uploadError"></div>
+        
+        <div class="loading" id="uploadLoading">
+            <div class="spinner"></div>
+            <p>Cargando archivos...</p>
+        </div>
+        
+        <div class="files-grid" id="uploadedFilesGrid"></div>
+    </div>
+    
+    <!-- Sección para descargar archivos -->
+    <div class="download-section" id="downloadSection">
+
+        <div class="buscadorDescarga" id="buscadorDescarga">
+            <input type="text" name="acortador" id="inputAcortadorID">
+            <button type="button" id="btnObtenerDocumentosID">Obtener Documentos</button>
+        </div>
+
+
+        <div class="loading" id="downloadLoading">
+            <div class="spinner"></div>
+            <p>Buscando archivos disponibles...</p>
+        </div>
+        
+        <div class="seccionDescargaTodo" id="seccionDescargaTodo">
+            <!-- <p id="textoDescargaTodoID"></p> -->
+            <button type="button" id="btnDescargaTodoID">Descargar Todos los archivos</button>
+        </div>
+        <div class="files-grid" id="downloadFilesGrid"></div>
+    </div>
+    <script type="module" src="js/transmisionDocumento3.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transmision Documento</title>
+    <!-- <link rel="stylesheet" href="css/transmisionDocumento.css"> -->
+</head>
+
+<body>
+    <div class="container">
+        <h1>Transmision Documento</h1>
+        <!-- Agrega el atributo multiple para permitir selección múltiple -->
+        <input type="file" id="fileInput" multiple>
+        <button id="uploadButton">Subir archivos</button>
+        <div id="progress"></div>
+
+        <div id="status"></div>
+        <div id="qrCode"></div>
+    </div>
+    <button id="descargaTempo">
+        DescargaTempo
+    </button>
+
+    <br>
+    <br>
+    <br>
+
+    <input type="text" id="inputAcortador">
+    <button id="obtenerDocumentos">
+        ObtenerDocumento
+    </button>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script> -->
+    <script type="module" src="js/tranmisionDocumento2.js"></script>
+</body>
+
+</html>
