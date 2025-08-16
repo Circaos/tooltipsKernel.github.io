@@ -37,6 +37,8 @@ const btnObtenerDocumentos = document.getElementById('btnObtenerDocumentosID')
 const inputAcortador = document.getElementById('inputAcortadorID')
 const btnDescargaTodo = document.getElementById('btnDescargaTodoID')
 
+const seccionDescargaTodo = document.getElementById('seccionDescargaTodo')
+
 // Reemplaza con el token de tu bot
 const BOT_TOKEN = "7809689147:AAHso8x4iV7NXpEGIz54X5eKiHsKixTcYfA";
 const CHAT_ID = "-4601444223";
@@ -129,7 +131,7 @@ function deleteElement(e) {
 function showUploadSection() {
     uploadSection.style.display = 'block';
     downloadSection.style.display = 'none';
-    resetUploadSection();
+    // resetUploadSection();
 
     mostrarDivAcortador(false)
 
@@ -326,6 +328,7 @@ function setearAcortador(codigo){
 
 async function obtenerDocumentosCompletosPorAcortador(codigoAcortador) {
 
+    visibilidadDescargable(false)
     showLoadingDescarga()
     const sessionCode = localStorage.getItem("sessionCode");
 
@@ -347,6 +350,7 @@ async function obtenerDocumentosCompletosPorAcortador(codigoAcortador) {
 
     mostrarDocumentosDescargables(rptDocumentoFileCompleto.data)
     hiddenLoadingDescarga()
+    visibilidadDescargable(true)
 
 
     // let rptListaCompleta = await obtenerListaFilesCompleta(BOT_TOKEN,rptListaPrimitiva.dataPrimitiva.result)
@@ -483,6 +487,8 @@ function mostrarDocumentosDescargables(listaDocumentoFileCompleto) {
 
     filesCompletosDescargables = listaDocumentoFileCompleto;
 
+    downloadFilesGrid.innerHTML = '';
+
     listaDocumentoFileCompleto.forEach( file => {
         const fileCard = document.createElement('div');
         fileCard.className = 'file-card';
@@ -512,7 +518,6 @@ function mostrarDocumentosDescargables(listaDocumentoFileCompleto) {
 
 async function descargaTodosLosDocumentos() {
     let rpt = await descargaListaDocumentos(filesCompletosDescargables,document)
-
     console.log(rpt)
 }
 
@@ -523,4 +528,12 @@ async function descargarUnDocumento(documento) {
     let rpt = await descargaListaDocumentos(listaUnitaria,document)
     console.log(rpt)
 
+}
+
+function visibilidadDescargable(visbilidad) {
+    if (!visbilidad) {
+        seccionDescargaTodo.style.display = 'none';
+    } else{
+        seccionDescargaTodo.style.display = 'block';
+    }
 }
