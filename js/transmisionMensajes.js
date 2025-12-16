@@ -13,11 +13,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const horaSessionCode = localStorage.getItem("horaSessionCode");
 
   // Verificar sesión
-  let rptVerificaSession = verificarSession(sessionCode, horaSessionCode);
+  let rptVerificaSession = verificarSession(sessionCode, horaSessionCode)
   if (!rptVerificaSession.status) {
-    alert(rptVerificaSession.mensaje);
-    window.location.href = "index.html";
-    return;
+      localStorage.clear();
+      alert(rptVerificaSession.mensaje)
+      window.location.href = "index.html";
+      return;
   }
 
   // Funciones
@@ -77,5 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
       taArea.value = leerTransmision.mensaje
     }
   })
+  
 
 });

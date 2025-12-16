@@ -6,6 +6,7 @@ import {
 } from "../functions/consultashttpTelegram.js";
 
 import {descargaFileApi,descargaDocumento,descargaListaDocumentos} from '../functions/funcionesDOM.js'
+import { verificarSession } from "../functions/funcionesGenerales.js";
 
 //TIPOS
 /**
@@ -537,3 +538,20 @@ function visibilidadDescargable(visbilidad) {
         seccionDescargaTodo.style.display = 'block';
     }
 }
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const sessionCode = localStorage.getItem("sessionCode");
+    const horaSessionCode = localStorage.getItem("horaSessionCode");
+
+    // Verificar sesión
+    let rptVerificaSession = verificarSession(sessionCode, horaSessionCode)
+    if (!rptVerificaSession.status) {
+        localStorage.clear();
+        alert(rptVerificaSession.mensaje)
+        window.location.href = "index.html";
+        return;
+    }
+})
