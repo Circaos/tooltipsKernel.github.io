@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="manifest" href="icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>Sistema Dinámico - Responsive</title>
+    <link rel="stylesheet" href="css/transmisionTelegram.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Pantalla de Loading -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <p>Verificando estado del sistema...</p>
+        </div>
+    </div>
+
+    <!-- Interfaz Google Fotos (para éxito/200) -->
+    <div id="google-photos-ui" class="hidden">
+        <nav class="photos-nav">
+            <div class="nav-left">
+                <button class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <i class="fas fa-camera-retro logo-icon"></i>
+                <h1 class="logo-text">Mi Galería</h1>
+            </div>
+            <div class="nav-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar fotos..." id="search-input">
+                </div>
+                <button class="btn-upload mobile-hidden">
+                    <i class="fas fa-cloud-upload-alt"></i> <span class="btn-text">Subir</span>
+                </button>
+                <button class="btn-upload mobile-only" title="Subir">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div class="photos-container">
+            <div class="photos-header">
+                <h2><i class="fas fa-images"></i> Galería por Meses</h2>
+                <div class="view-options">
+                    <button class="btn-view active" data-view="grid">
+                        <i class="fas fa-th"></i> <span class="btn-text">Mosaico</span>
+                    </button>
+                    <button class="btn-view" data-view="list">
+                        <i class="fas fa-list"></i> <span class="btn-text">Lista</span>
+                    </button>
+                    <select class="month-filter mobile-hidden" id="month-filter">
+                        <option value="all">Todos los meses</option>
+                        <option value="agosto">Agosto 2024</option>
+                        <option value="julio">Julio 2024</option>
+                        <option value="junio">Junio 2024</option>
+                        <option value="mayo">Mayo 2024</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Aquí se cargarán los meses dinámicamente -->
+            <div id="monthly-gallery"></div>
+
+            <!-- Botón para cargar más -->
+            <div class="load-more-container">
+                <button id="load-more-btn" class="load-more-btn">
+                    <i class="fas fa-plus"></i> Cargar más meses
+                </button>
+            </div>
+        </div>
+
+        <!-- Menú móvil -->
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="mobile-menu-header">
+                <h3>Menú</h3>
+                <button class="close-menu" id="close-menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="mobile-menu-items">
+                <a href="#"><i class="fas fa-home"></i> Inicio</a>
+                <a href="#"><i class="fas fa-images"></i> Fotos</a>
+                <a href="#"><i class="fas fa-share-alt"></i> Compartir</a>
+                <a href="#"><i class="fas fa-cog"></i> Configuración</a>
+                <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interfaz Tutorial (para error/400) -->
+    <div id="tutorial-ui" class="hidden">
+        <div class="tutorial-header">
+            <button class="back-button" id="back-button">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1><i class="fas fa-graduation-cap"></i> Tutorial de Solución</h1>
+        </div>
+
+        <div class="tutorial-container">
+            <!-- Panel izquierdo - Pasos del tutorial -->
+            <div class="tutorial-steps">
+                <div class="steps-header">
+                    <h2>Pasos para Solucionar</h2>
+                    <p class="error-message" id="error-message">Error detectado</p>
+                </div>
+                
+                <div class="steps-list">
+                    <!-- Los pasos se cargarán dinámicamente -->
+                </div>
+
+                <div class="feedback-section">
+                    <h3><i class="fa-solid fa-paper-plane"></i> Ingresar el ID del Chat</h3>
+                    <textarea id="tutorial-feedback" placeholder="Describe tu problema o pregunta aquí..."></textarea>
+                    <button id="continue-btn" class="continue-btn">
+                        <i class="fas fa-paper-plane"></i> Enviar y Continuar
+                    </button>
+                    <!-- <button id="skip-btn" class="skip-btn">
+                        Omitir y continuar
+                    </button> -->
+                </div>
+            </div>
+
+            <!-- Panel derecho - Simulación de celular -->
+            <div class="phone-preview">
+                <div class="preview-header">
+                    <h3>Simulación Paso a Paso</h3>
+                    <!-- <p>Ve cómo se realiza cada paso</p> -->
+                </div>
+                
+                <div class="phone-frame">
+                    <div class="phone-header">
+                        <div class="phone-notch"></div>
+                        <div class="phone-time">14:30</div>
+                        <div class="phone-status">
+                            <i class="fas fa-wifi"></i>
+                            <i class="fas fa-battery-full"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="phone-screen">
+                        <div class="phone-content" id="phone-content">
+                            <!-- El contenido del celular cambiará según el paso seleccionado -->
+                        </div>
+                    </div>
+                    
+                    <div class="phone-footer">
+                        <div class="phone-nav">
+                            <!-- <i class="fas fa-home"></i>
+                            <i class="fas fa-search"></i> -->
+                            <div class="phone-home-button"></div>
+                            <!-- <i class="fas fa-share-alt"></i>
+                            <i class="fas fa-user"></i> -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="phone-instructions">
+                    <h3 id="step-title">Selecciona un paso para comenzar</h3>
+                    <p id="step-description">Cada paso mostrará una demostración práctica en esta simulación</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón para cambiar entre vistas (solo para desarrollo) -->
+        <!-- <div class="dev-controls">
+            <button onclick="window.reloadApp(false)" class="dev-btn success-btn">
+                <i class="fas fa-check"></i> Vista Éxito
+            </button>
+            <button onclick="window.reloadApp(true)" class="dev-btn error-btn">
+                <i class="fas fa-times"></i> Vista Error
+            </button>
+        </div> -->
+
+    <script src="js/transmisionTelegram.js"></script>
+</body>
+</html>

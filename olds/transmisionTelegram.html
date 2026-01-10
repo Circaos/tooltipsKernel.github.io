@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Dinámico</title>
+    <link rel="stylesheet" href="css/transmisionTelegram.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Pantalla de Loading -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <p>Verificando estado del sistema...</p>
+        </div>
+    </div>
+
+    <!-- Interfaz Google Fotos (para éxito/200)
+    <div id="google-photos-ui" class="hidden">
+        <nav class="photos-nav">
+            <div class="nav-left">
+                <i class="fas fa-camera-retro"></i>
+                <h1>Mi Galería</h1>
+            </div>
+            <div class="nav-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar fotos...">
+                </div>
+                <button class="btn-upload">
+                    <i class="fas fa-cloud-upload-alt"></i> Subir
+                </button>
+            </div>
+        </nav>
+
+        <div class="photos-container">
+            <div class="photos-header">
+                <h2>Fotos Recientes</h2>
+                <div class="view-options">
+                    <button class="btn-view active"><i class="fas fa-th"></i> Mosaico</button>
+                    <button class="btn-view"><i class="fas fa-list"></i> Lista</button>
+                </div>
+            </div>
+
+            <div class="photos-grid">
+                Las fotos se cargarán dinámicamente desde JavaScript 
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Interfaz Google Fotos (para éxito/200) -->
+    <div id="google-photos-ui" class="hidden">
+        <nav class="photos-nav">
+            <div class="nav-left">
+                <i class="fas fa-camera-retro"></i>
+                <h1>Mi Galería por Meses</h1>
+            </div>
+            <div class="nav-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar fotos por mes...">
+                </div>
+                <div class="date-filter">
+                    <select id="month-filter">
+                        <option value="all">Todos los meses</option>
+                        <option value="august">Agosto 2024</option>
+                        <option value="july">Julio 2024</option>
+                        <option value="june">Junio 2024</option>
+                        <option value="may">Mayo 2024</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+
+        <!-- El contenido se generará dinámicamente -->
+    </div>
+
+    <!-- Interfaz Tutorial (para error/400) -->
+    <div id="tutorial-ui" class="hidden">
+        <div class="tutorial-container">
+            <!-- Panel izquierdo - Pasos del tutorial -->
+            <div class="tutorial-steps">
+                <h2><i class="fas fa-graduation-cap"></i> Tutorial de Configuración</h2>
+                <p class="tutorial-subtitle">Sigue estos pasos para solucionar el problema</p>
+
+                <div class="steps-list">
+                    <!-- Los pasos se cargarán dinámicamente -->
+                </div>
+
+                <div class="feedback-section">
+                    <h3><i class="fas fa-comment-dots"></i> ¿Tienes alguna duda?</h3>
+                    <textarea id="tutorial-feedback"
+                        placeholder="Escribe tus preguntas o comentarios aquí..."></textarea>
+                    <button id="continue-btn" class="continue-btn">
+                        <i class="fas fa-arrow-right"></i> Continuar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Panel derecho - Simulación de celular -->
+            <div class="phone-preview">
+                <div class="phone-frame">
+                    <div class="phone-header">
+                        <div class="phone-notch"></div>
+                        <div class="phone-time">14:30</div>
+                    </div>
+
+                    <div class="phone-screen">
+                        <div class="phone-content" id="phone-content">
+                            <!-- El contenido del celular cambiará según el paso seleccionado -->
+                        </div>
+                    </div>
+
+                    <div class="phone-footer">
+                        <div class="phone-home-button"></div>
+                    </div>
+                </div>
+
+                <div class="phone-instructions">
+                    <h3 id="step-title">Selecciona un paso para ver la demostración</h3>
+                    <p id="step-description">Cada paso mostrará una demostración práctica en esta simulación</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/transmisionTelegram.js"></script>
+</body>
+
+</html>
