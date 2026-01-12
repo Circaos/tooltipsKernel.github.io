@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="icons/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="icons/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
@@ -27,6 +28,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <!-- Pantalla de Loading -->
     <div id="loading-screen" class="loading-screen">
@@ -46,7 +48,7 @@
                 <i class="fas fa-camera-retro logo-icon"></i>
                 <h1 class="logo-text">Mi Galería</h1>
             </div>
-            <div class="nav-right">
+            <!-- <div class="nav-right">
                 <div class="search-box">
                     <i class="fas fa-search"></i>
                     <input type="text" placeholder="Buscar fotos..." id="search-input">
@@ -57,20 +59,20 @@
                 <button class="btn-upload mobile-only" title="Subir">
                     <i class="fas fa-cloud-upload-alt"></i>
                 </button>
-            </div>
+            </div> -->
         </nav>
 
         <div class="photos-container">
             <div class="photos-header">
-                <h2><i class="fas fa-images"></i> Galería por Meses</h2>
+                <!-- <h2><i class="fas fa-images"></i> Galería por Meses</h2> -->
                 <div class="view-options">
-                    <button class="btn-view active" data-view="grid">
+                    <!-- <button class="btn-view active" data-view="grid">
                         <i class="fas fa-th"></i> <span class="btn-text">Mosaico</span>
-                    </button>
-                    <button class="btn-view" data-view="list">
+                    </button> -->
+                    <!-- <button class="btn-view" data-view="list">
                         <i class="fas fa-list"></i> <span class="btn-text">Lista</span>
-                    </button>
-                    <select class="month-filter mobile-hidden" id="month-filter">
+                    </button> -->
+                    <select class="month-filter" id="month-filter">
                         <option value="all">Todos los meses</option>
                         <option value="agosto">Agosto 2024</option>
                         <option value="julio">Julio 2024</option>
@@ -125,7 +127,7 @@
                     <h2>Pasos para Solucionar</h2>
                     <p class="error-message" id="error-message">Error detectado</p>
                 </div>
-                
+
                 <div class="steps-list">
                     <!-- Los pasos se cargarán dinámicamente -->
                 </div>
@@ -148,7 +150,7 @@
                     <h3>Simulación Paso a Paso</h3>
                     <!-- <p>Ve cómo se realiza cada paso</p> -->
                 </div>
-                
+
                 <div class="phone-frame">
                     <div class="phone-header">
                         <div class="phone-notch"></div>
@@ -158,13 +160,13 @@
                             <i class="fas fa-battery-full"></i>
                         </div>
                     </div>
-                    
+
                     <div class="phone-screen">
                         <div class="phone-content" id="phone-content">
                             <!-- El contenido del celular cambiará según el paso seleccionado -->
                         </div>
                     </div>
-                    
+
                     <div class="phone-footer">
                         <div class="phone-nav">
                             <!-- <i class="fas fa-home"></i>
@@ -175,7 +177,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="phone-instructions">
                     <h3 id="step-title">Selecciona un paso para comenzar</h3>
                     <p id="step-description">Cada paso mostrará una demostración práctica en esta simulación</p>
@@ -185,7 +187,7 @@
     </div>
 
     <!-- Botón para cambiar entre vistas (solo para desarrollo) -->
-        <!-- <div class="dev-controls">
+    <!-- <div class="dev-controls">
             <button onclick="window.reloadApp(false)" class="dev-btn success-btn">
                 <i class="fas fa-check"></i> Vista Éxito
             </button>
@@ -196,4 +198,5 @@
 
     <script src="js/transmisionTelegram.js"></script>
 </body>
+
 </html>

@@ -1,11 +1,11 @@
 export const API_CONFIG = {
-   // Puedes cambiarlo fácilmente si el servidor cambia
+  // Puedes cambiarlo fácilmente si el servidor cambia
   // BASE_URL: "http://192.168.18.69:3000",
   // BASE_URL: "http://10.31.101.80:3000",
   // BASE_URL: "http://192.168.1.49:3000",
   // BASE_URL: "http://10.176.183.114:3000",
-  // BASE_URL: "http://192.168.18.69:3050",
-  BASE_URL: "https://apiproviaspruebav1-production.up.railway.app",
+  BASE_URL: "http://192.168.18.22:3050",
+  // BASE_URL: "https://apiproviaspruebav1-production.up.railway.app",
   ENDPOINTS: {
     GET_INFO_FECHA: "/webInt/getInfoFechaProviasSession",
     GET_DATA_FILTRADA: "/webInt/getDataFiltradaSession",

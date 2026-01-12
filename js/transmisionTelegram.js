@@ -21,113 +21,113 @@ const mobileMenu = document.getElementById('mobile-menu');
 // Datos de ejemplo para fotos agrupadas por meses
 const samplePhotosByMonth = {
     "Agosto 2024": [
-        { 
-            id: 1, 
-            title: "Vacaciones en la playa", 
-            date: "15 Ago 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop" 
+        {
+            id: 1,
+            title: "Vacaciones en la playa",
+            date: "15 Ago 2024",
+            imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop"
         },
-        { 
-            id: 2, 
-            title: "Cena familiar", 
-            date: "12 Ago 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w-400&h=250&fit=crop" 
+        {
+            id: 2,
+            title: "Cena familiar",
+            date: "12 Ago 2024",
+            imageUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w-400&h=250&fit=crop"
         },
-        { 
-            id: 3, 
-            title: "Puesta de sol", 
-            date: "10 Ago 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=350&fit=crop" 
+        {
+            id: 3,
+            title: "Puesta de sol",
+            date: "10 Ago 2024",
+            imageUrl: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=350&fit=crop"
         },
-        { 
-            id: 4, 
-            title: "Montañas", 
-            date: "8 Ago 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=300&fit=crop" 
+        {
+            id: 4,
+            title: "Montañas",
+            date: "8 Ago 2024",
+            imageUrl: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=300&fit=crop"
         },
-        { 
-            id: 5, 
-            title: "Concierto", 
-            date: "5 Ago 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=280&fit=crop" 
+        {
+            id: 5,
+            title: "Concierto",
+            date: "5 Ago 2024",
+            imageUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=280&fit=crop"
         },
-        { 
-            id: 6, 
-            title: "Graduación", 
-            date: "1 Ago 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=400&h=320&fit=crop" 
+        {
+            id: 6,
+            title: "Graduación",
+            date: "1 Ago 2024",
+            imageUrl: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=400&h=320&fit=crop"
         }
     ],
     "Julio 2024": [
-        { 
-            id: 7, 
-            title: "Cumpleaños", 
-            date: "28 Jul 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=300&fit=crop" 
+        {
+            id: 7,
+            title: "Cumpleaños",
+            date: "28 Jul 2024",
+            imageUrl: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=300&fit=crop"
         },
-        { 
-            id: 8, 
-            title: "Viaje de trabajo", 
-            date: "25 Jul 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=400&h=260&fit=crop" 
+        {
+            id: 8,
+            title: "Viaje de trabajo",
+            date: "25 Jul 2024",
+            imageUrl: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=400&h=260&fit=crop"
         },
-        { 
-            id: 9, 
-            title: "Senderismo", 
-            date: "20 Jul 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=340&fit=crop" 
+        {
+            id: 9,
+            title: "Senderismo",
+            date: "20 Jul 2024",
+            imageUrl: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=340&fit=crop"
         },
-        { 
-            id: 10, 
-            title: "Amigos en el parque", 
-            date: "15 Jul 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=400&h=290&fit=crop" 
+        {
+            id: 10,
+            title: "Amigos en el parque",
+            date: "15 Jul 2024",
+            imageUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=400&h=290&fit=crop"
         },
-        { 
-            id: 11, 
-            title: "Café matutino", 
-            date: "10 Jul 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=310&fit=crop" 
+        {
+            id: 11,
+            title: "Café matutino",
+            date: "10 Jul 2024",
+            imageUrl: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=310&fit=crop"
         }
     ],
     "Junio 2024": [
-        { 
-            id: 12, 
-            title: "Boda familiar", 
-            date: "28 Jun 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&h=300&fit=crop" 
+        {
+            id: 12,
+            title: "Boda familiar",
+            date: "28 Jun 2024",
+            imageUrl: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&h=300&fit=crop"
         },
-        { 
-            id: 13, 
-            title: "Playa atardecer", 
-            date: "20 Jun 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=270&fit=crop" 
+        {
+            id: 13,
+            title: "Playa atardecer",
+            date: "20 Jun 2024",
+            imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=270&fit=crop"
         },
-        { 
-            id: 14, 
-            title: "Museo", 
-            date: "15 Jun 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=330&fit=crop" 
+        {
+            id: 14,
+            title: "Museo",
+            date: "15 Jun 2024",
+            imageUrl: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=330&fit=crop"
         },
-        { 
-            id: 15, 
-            title: "Comida casera", 
-            date: "10 Jun 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=300&fit=crop" 
+        {
+            id: 15,
+            title: "Comida casera",
+            date: "10 Jun 2024",
+            imageUrl: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=300&fit=crop"
         }
     ],
     "Mayo 2024": [
-        { 
-            id: 16, 
-            title: "Fiesta de cumpleaños", 
-            date: "5 Mayo 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=280&fit=crop" 
+        {
+            id: 16,
+            title: "Fiesta de cumpleaños",
+            date: "5 Mayo 2024",
+            imageUrl: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=280&fit=crop"
         },
-        { 
-            id: 17, 
-            title: "Visita a familiares", 
-            date: "2 Mayo 2024", 
-            imageUrl: "https://images.unsplash.com/photo-1541971875076-8f705f1101e0?w=400&h=320&fit=crop" 
+        {
+            id: 17,
+            title: "Visita a familiares",
+            date: "2 Mayo 2024",
+            imageUrl: "https://images.unsplash.com/photo-1541971875076-8f705f1101e0?w=400&h=320&fit=crop"
         }
     ]
 };
@@ -233,36 +233,36 @@ async function callApi() {
     try {
         // Mostrar loading
         loadingScreen.classList.remove('hidden');
-        
+
         // Simular delay de red
         await new Promise(resolve => setTimeout(resolve, 1500));
-        
+
         // SIMULACIÓN: Para probar ambos casos, cambia este valor
-        const forceError = true; // Cambiar a true para ver la interfaz de error
-        
+        const forceError = false; // Cambiar a true para ver la interfaz de error
+
         // Simular respuesta de API
-        const response = forceError ? 
-            { 
-                ok: false, 
-                status: 400, 
-                message: "Error de configuración detectado. El servidor no puede procesar tu solicitud." 
+        const response = forceError ?
+            {
+                ok: false,
+                status: 400,
+                message: "Error de configuración detectado. El servidor no puede procesar tu solicitud."
             } :
-            { 
-                ok: true, 
-                status: 200, 
-                data: samplePhotosByMonth 
+            {
+                ok: true,
+                status: 200,
+                data: samplePhotosByMonth
             };
-        
+
         // Ocultar loading
         loadingScreen.classList.add('hidden');
-        
+
         // Mostrar interfaz correspondiente
         if (response.ok) {
             showGooglePhotosUI(response.data);
         } else {
             showTutorialUI(response.message);
         }
-        
+
     } catch (error) {
         console.error('Error:', error);
         loadingScreen.classList.add('hidden');
@@ -274,13 +274,13 @@ async function callApi() {
 function showGooglePhotosUI(photosByMonth) {
     googlePhotosUI.classList.remove('hidden');
     tutorialUI.classList.add('hidden');
-    
+
     // Guardar datos originales para filtrado
     filteredMonths = { ...photosByMonth };
-    
+
     // Renderizar galería
     renderMonthlyGallery(photosByMonth);
-    
+
     // Inicializar controles
     initGalleryControls();
 }
@@ -288,12 +288,12 @@ function showGooglePhotosUI(photosByMonth) {
 // Función para renderizar galería por meses
 function renderMonthlyGallery(photosByMonth) {
     monthlyGallery.innerHTML = '';
-    
+
     Object.entries(photosByMonth).forEach(([month, photos]) => {
         const monthSection = document.createElement('div');
         monthSection.className = 'month-section';
         monthSection.dataset.month = month.toLowerCase().replace(/\s+/g, '-');
-        
+
         monthSection.innerHTML = `
             <div class="month-header">
                 <div class="month-title">
@@ -304,9 +304,9 @@ function renderMonthlyGallery(photosByMonth) {
             </div>
             <div class="photos-grid-month"></div>
         `;
-        
+
         const grid = monthSection.querySelector('.photos-grid-month');
-        
+
         // Renderizar fotos del mes
         photos.forEach(photo => {
             const photoCard = document.createElement('div');
@@ -318,15 +318,15 @@ function renderMonthlyGallery(photosByMonth) {
                     <div class="photo-date-month">${photo.date}</div>
                 </div>
             `;
-            
+
             // Añadir evento click
             photoCard.addEventListener('click', () => {
                 alert(`Ver foto: ${photo.title}\nFecha: ${photo.date}`);
             });
-            
+
             grid.appendChild(photoCard);
         });
-        
+
         monthlyGallery.appendChild(monthSection);
     });
 }
@@ -336,11 +336,11 @@ function initGalleryControls() {
     // Botones de vista
     const viewButtons = document.querySelectorAll('[data-view]');
     viewButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             viewButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
             currentView = this.dataset.view;
-            
+
             // Cambiar vista (puedes añadir más lógica aquí)
             if (currentView === 'list') {
                 document.querySelectorAll('.photos-grid-month').forEach(grid => {
@@ -353,29 +353,29 @@ function initGalleryControls() {
             }
         });
     });
-    
+
     // Búsqueda
     if (searchInput) {
-        searchInput.addEventListener('input', debounce(function(e) {
+        searchInput.addEventListener('input', debounce(function (e) {
             const searchTerm = e.target.value.toLowerCase();
             filterGallery(searchTerm);
         }, 300));
     }
-    
+
     // Filtro por mes
     if (monthFilter) {
-        monthFilter.addEventListener('change', function(e) {
+        monthFilter.addEventListener('change', function (e) {
             const selectedMonth = e.target.value;
             filterByMonth(selectedMonth);
         });
     }
-    
+
     // Cargar más
     if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', function() {
+        loadMoreBtn.addEventListener('click', function () {
             this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cargando...';
             this.disabled = true;
-            
+
             // Simular carga de más datos
             setTimeout(() => {
                 alert('Se cargarían más meses aquí. En una implementación real, esto cargaría más datos del servidor.');
@@ -384,7 +384,7 @@ function initGalleryControls() {
             }, 1000);
         });
     }
-    
+
     // Menú móvil
     if (menuToggle) {
         menuToggle.addEventListener('click', () => {
@@ -392,14 +392,14 @@ function initGalleryControls() {
             document.body.style.overflow = 'hidden';
         });
     }
-    
+
     if (closeMenu) {
         closeMenu.addEventListener('click', () => {
             mobileMenu.classList.remove('active');
             document.body.style.overflow = '';
         });
     }
-    
+
     // Cerrar menú al hacer clic fuera
     document.addEventListener('click', (e) => {
         if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
@@ -415,20 +415,20 @@ function filterGallery(searchTerm) {
         renderMonthlyGallery(filteredMonths);
         return;
     }
-    
+
     const filtered = {};
-    
+
     Object.entries(filteredMonths).forEach(([month, photos]) => {
-        const filteredPhotos = photos.filter(photo => 
+        const filteredPhotos = photos.filter(photo =>
             photo.title.toLowerCase().includes(searchTerm) ||
             photo.date.toLowerCase().includes(searchTerm)
         );
-        
+
         if (filteredPhotos.length > 0) {
             filtered[month] = filteredPhotos;
         }
     });
-    
+
     renderMonthlyGallery(filtered);
 }
 
@@ -438,7 +438,7 @@ function filterByMonth(selectedMonth) {
         renderMonthlyGallery(filteredMonths);
         return;
     }
-    
+
     const filtered = {};
     const monthMap = {
         'agosto': 'Agosto 2024',
@@ -446,12 +446,12 @@ function filterByMonth(selectedMonth) {
         'junio': 'Junio 2024',
         'mayo': 'Mayo 2024'
     };
-    
+
     const monthName = monthMap[selectedMonth];
     if (monthName && filteredMonths[monthName]) {
         filtered[monthName] = filteredMonths[monthName];
         renderMonthlyGallery(filtered);
-        
+
         // Scroll al mes seleccionado
         setTimeout(() => {
             const element = document.querySelector(`[data-month="${monthName.toLowerCase().replace(/\s+/g, '-')}"]`);
@@ -466,16 +466,16 @@ function filterByMonth(selectedMonth) {
 function showTutorialUI(errorMessage) {
     googlePhotosUI.classList.add('hidden');
     tutorialUI.classList.remove('hidden');
-    
+
     // Actualizar mensaje de error
     const errorElement = document.getElementById('error-message');
     if (errorElement) {
         errorElement.textContent = errorMessage;
     }
-    
+
     // Renderizar pasos del tutorial
     renderTutorialSteps();
-    
+
     // Inicializar controles del tutorial
     initTutorialControls();
 }
@@ -483,7 +483,7 @@ function showTutorialUI(errorMessage) {
 // Función para renderizar pasos del tutorial
 function renderTutorialSteps() {
     stepsList.innerHTML = '';
-    
+
     tutorialSteps.forEach((step, index) => {
         const stepItem = document.createElement('div');
         stepItem.className = `step-item ${index === 0 ? 'active' : ''}`;
@@ -496,13 +496,13 @@ function renderTutorialSteps() {
             <div class="step-description">${step.description}</div>
         `;
         stepsList.appendChild(stepItem);
-        
+
         // Event listener para cada paso
         stepItem.addEventListener('click', () => {
             selectTutorialStep(step, index);
         });
     });
-    
+
     // Mostrar primer paso por defecto
     if (tutorialSteps.length > 0) {
         selectTutorialStep(tutorialSteps[0], 0);
@@ -515,16 +515,16 @@ function selectTutorialStep(step, index) {
     document.querySelectorAll('.step-item').forEach(item => {
         item.classList.remove('active');
     });
-    
+
     // Agregar clase active al paso clickeado
     const stepElement = document.querySelector(`[data-step-id="${step.id}"]`);
     if (stepElement) {
         stepElement.classList.add('active');
     }
-    
+
     // Actualizar vista del celular
     updatePhoneScreen(step);
-    
+
     // Actualizar instrucciones
     if (stepTitle) {
         stepTitle.textContent = `Paso ${index + 1}: ${step.title}`;
@@ -537,9 +537,9 @@ function selectTutorialStep(step, index) {
 // Función para actualizar la pantalla del celular
 function updatePhoneScreen(step) {
     if (!phoneContent) return;
-    
+
     phoneContent.innerHTML = step.screenContent;
-    
+
     // Animar el cambio
     phoneContent.style.opacity = '0';
     setTimeout(() => {
@@ -554,7 +554,7 @@ function initTutorialControls() {
     if (continueBtn) {
         continueBtn.addEventListener('click', handleContinue);
     }
-    
+
     // Botón omitir
     if (skipBtn) {
         skipBtn.addEventListener('click', () => {
@@ -563,7 +563,7 @@ function initTutorialControls() {
             alert(`Has omitido el paso ${stepNumber}. Puedes continuar con el siguiente paso.`);
         });
     }
-    
+
     // Botón volver
     if (backButton) {
         backButton.addEventListener('click', () => {
@@ -572,7 +572,7 @@ function initTutorialControls() {
             }
         });
     }
-    
+
     // Enviar feedback con Enter
     if (feedbackTextarea) {
         feedbackTextarea.addEventListener('keypress', (e) => {
@@ -586,7 +586,7 @@ function initTutorialControls() {
 // Función para manejar el botón continuar
 function handleContinue() {
     const feedback = feedbackTextarea.value.trim();
-    
+
     if (feedback) {
         // Mostrar confirmación
         const confirmation = document.createElement('div');
@@ -597,19 +597,19 @@ function handleContinue() {
                 <p>Hemos registrado tu mensaje y te contactaremos pronto.</p>
             </div>
         `;
-        
+
         // Aquí podrías enviar el feedback a tu servidor
         console.log('Feedback enviado:', feedback);
-        
+
         // Limpiar textarea
         feedbackTextarea.value = '';
-        
+
         // Mostrar mensaje de éxito
         alert('¡Gracias por tu comentario! Hemos registrado tu mensaje.');
     } else {
         const activeStep = document.querySelector('.step-item.active');
         const stepNumber = activeStep?.querySelector('.step-number')?.textContent || 1;
-        
+
         // Avanzar al siguiente paso si existe
         const nextIndex = parseInt(stepNumber);
         if (nextIndex < tutorialSteps.length) {
@@ -637,36 +637,36 @@ function debounce(func, wait) {
 document.addEventListener('DOMContentLoaded', () => {
     // Iniciar llamada a API
     callApi();
-    
+
     // Añadir overlay para menú móvil
     const overlay = document.createElement('div');
     overlay.className = 'mobile-menu-overlay';
     document.body.appendChild(overlay);
-    
+
     // Cerrar menú al hacer clic en overlay
     overlay.addEventListener('click', () => {
         mobileMenu.classList.remove('active');
         overlay.classList.remove('active');
         document.body.style.overflow = '';
     });
-    
+
     // Actualizar overlay cuando se abre/cierra menú
     menuToggle.addEventListener('click', () => {
         overlay.classList.add('active');
     });
-    
+
     closeMenu.addEventListener('click', () => {
         overlay.classList.remove('active');
     });
 });
 
 // Función global para cambiar entre vistas (para desarrollo)
-window.reloadApp = function(forceError = false) {
+window.reloadApp = function (forceError = false) {
     // Mostrar loading
     googlePhotosUI.classList.add('hidden');
     tutorialUI.classList.add('hidden');
     loadingScreen.classList.remove('hidden');
-    
+
     // Simular llamada a API
     setTimeout(() => {
         if (forceError) {
@@ -683,7 +683,7 @@ window.addEventListener('resize', debounce(() => {
     if (currentView === 'grid') {
         const isMobile = window.innerWidth < 768;
         const minWidth = isMobile ? '130px' : '180px';
-        
+
         document.querySelectorAll('.photos-grid-month').forEach(grid => {
             grid.style.gridTemplateColumns = `repeat(auto-fill, minmax(${minWidth}, 1fr))`;
         });
@@ -691,7 +691,7 @@ window.addEventListener('resize', debounce(() => {
 }, 250));
 
 // Prevenir zoom en input en móviles
-document.addEventListener('touchstart', function(event) {
+document.addEventListener('touchstart', function (event) {
     if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
         event.target.style.fontSize = '16px';
     }
@@ -709,7 +709,7 @@ if ('IntersectionObserver' in window) {
             }
         });
     });
-    
+
     // Observar imágenes futuras
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('img[data-src]').forEach(img => {
