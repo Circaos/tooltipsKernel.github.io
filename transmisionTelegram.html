@@ -23,10 +23,10 @@
     <meta name="msapplication-TileImage" content="icons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
-    <title>Sistema Dinámico - Responsive</title>
+    <title>Transmisión - TEL</title>
     <link rel="stylesheet" href="css/transmisionTelegram.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
 </head>
 
 <body>
@@ -42,24 +42,33 @@
     <div id="google-photos-ui" class="hidden">
         <nav class="photos-nav">
             <div class="nav-left">
-                <button class="menu-toggle" id="menu-toggle">
+                <!-- <button class="menu-toggle" id="menu-toggle">
                     <i class="fas fa-bars"></i>
-                </button>
+                </button> -->
                 <i class="fas fa-camera-retro logo-icon"></i>
-                <h1 class="logo-text">Mi Galería</h1>
+                <h1 class="logo-text  mobile-hidden">Mi Galería</h1>
+
+                <div class="content-chat">
+                    <h1 class="logo-text-idchat mobile-hidden">idchat: </h1>
+                    <div class="idchat-code" id="idchatCode">0000000000000000000000</div>
+                    <button class="btn-back" title="volver" id="btn-delete-idchat">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
+                </div>
+
             </div>
-            <!-- <div class="nav-right">
-                <div class="search-box">
+            <div class="nav-right">
+                <!-- <div class="search-box">
                     <i class="fas fa-search"></i>
                     <input type="text" placeholder="Buscar fotos..." id="search-input">
-                </div>
-                <button class="btn-upload mobile-hidden">
-                    <i class="fas fa-cloud-upload-alt"></i> <span class="btn-text">Subir</span>
+                </div> -->
+                <button class="btn-back mobile-hidden" id="btn-back">
+                    <i class="fa fa-arrow-left"></i> <span class="btn-text">Volver al menu</span>
                 </button>
-                <button class="btn-upload mobile-only" title="Subir">
-                    <i class="fas fa-cloud-upload-alt"></i>
+                <button class="btn-back mobile-only" title="volver" id="btn-back-mobile">
+                    <i class="fa fa-arrow-left"></i>
                 </button>
-            </div> -->
+            </div>
         </nav>
 
         <div class="photos-container">
@@ -68,17 +77,22 @@
                 <div class="view-options">
                     <!-- <button class="btn-view active" data-view="grid">
                         <i class="fas fa-th"></i> <span class="btn-text">Mosaico</span>
-                    </button> -->
-                    <!-- <button class="btn-view" data-view="list">
+                    </button>
+                    <button class="btn-view" data-view="list">
                         <i class="fas fa-list"></i> <span class="btn-text">Lista</span>
                     </button> -->
-                    <select class="month-filter" id="month-filter">
-                        <option value="all">Todos los meses</option>
+                    <input type="date" id="fechaSeleccion" class="month-filter">
+                    <!-- <select class="month-filter" id="month-filter"> -->
+                    <!-- <option value="all">Todos los meses</option>
                         <option value="agosto">Agosto 2024</option>
                         <option value="julio">Julio 2024</option>
                         <option value="junio">Junio 2024</option>
-                        <option value="mayo">Mayo 2024</option>
+                        <option value="mayo">Mayo 2024</option> -->
                     </select>
+                    <button class="btn-reload" id="btn-reload">
+                        <i class="fa-solid fa-arrow-rotate-right"></i>
+                        <span class="btn-text">Recargar</span>
+                    </button>
                 </div>
             </div>
 
@@ -86,11 +100,11 @@
             <div id="monthly-gallery"></div>
 
             <!-- Botón para cargar más -->
-            <div class="load-more-container">
+            <!-- <div class="load-more-container">
                 <button id="load-more-btn" class="load-more-btn">
                     <i class="fas fa-plus"></i> Cargar más meses
                 </button>
-            </div>
+            </div> -->
         </div>
 
         <!-- Menú móvil -->
@@ -132,10 +146,16 @@
                     <!-- Los pasos se cargarán dinámicamente -->
                 </div>
 
+                <button id="continue-btn" class="continue-btn">
+                    <i class="fa-solid fa-arrow-right-long"></i>
+                    Continuar Tutorial
+                    <i class="fa-solid fa-arrow-right-long"></i>
+                </button>
+
                 <div class="feedback-section">
                     <h3><i class="fa-solid fa-paper-plane"></i> Ingresar el ID del Chat</h3>
                     <textarea id="tutorial-feedback" placeholder="Describe tu problema o pregunta aquí..."></textarea>
-                    <button id="continue-btn" class="continue-btn">
+                    <button id="send-btn" class="continue-btn">
                         <i class="fas fa-paper-plane"></i> Enviar y Continuar
                     </button>
                     <!-- <button id="skip-btn" class="skip-btn">
@@ -196,7 +216,7 @@
             </button>
         </div> -->
 
-    <script src="js/transmisionTelegram.js"></script>
+    <script type="module" src="js/transmisionTelegram.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,9 @@
+import { verificarSession } from "../functions/funcionesGenerales.js"
+import { API_CONFIG } from "../config/config.js"
+
+//Funciones
+import { descargaFileApi } from "../functions/funcionesDOM.js"
+
 // Elementos del DOM
 const loadingScreen = document.getElementById('loading-screen');
 const googlePhotosUI = document.getElementById('google-photos-ui');
@@ -12,11 +18,42 @@ const continueBtn = document.getElementById('continue-btn');
 const skipBtn = document.getElementById('skip-btn');
 const backButton = document.getElementById('back-button');
 const searchInput = document.getElementById('search-input');
-const monthFilter = document.getElementById('month-filter');
+// const monthFilter = document.getElementById('month-filter');
+const fechaSeleccion = document.getElementById('fechaSeleccion');
 const loadMoreBtn = document.getElementById('load-more-btn');
+const btnBack = document.getElementById('btn-back');
+const btnReload = document.getElementById('btn-reload');
+const btnBackMobile = document.getElementById('btn-back-mobile');
 const menuToggle = document.getElementById('menu-toggle');
 const closeMenu = document.getElementById('close-menu');
 const mobileMenu = document.getElementById('mobile-menu');
+
+const idchatCode = document.getElementById('idchatCode');
+const btnDeleteIdchat = document.getElementById('btn-delete-idchat');
+const btnSend = document.getElementById('send-btn');
+
+const sessionCode = localStorage.getItem("sessionCode");
+const horaSessionCode = localStorage.getItem("horaSessionCode");
+const nombreSessionCode = localStorage.getItem("nombre").replace(" ", "");
+
+let rptVerificaSession = verificarSession(sessionCode, horaSessionCode)
+if (!rptVerificaSession.status) {
+    localStorage.clear();
+    alert(rptVerificaSession.mensaje)
+    window.location.href = "index.html";
+    // return;
+}
+
+
+// Variables globales
+let valueMonthSelect = "";
+let valueDaySelect = "";
+let textMonthSelect = "";
+let idchatCodeGlobal = "";
+
+let iniciadoControlsTutorial = false;
+let iniciadoControlsGallery = false;
+
 
 // Datos de ejemplo para fotos agrupadas por meses
 const samplePhotosByMonth = {
@@ -25,13 +62,13 @@ const samplePhotosByMonth = {
             id: 1,
             title: "Vacaciones en la playa",
             date: "15 Ago 2024",
-            imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop"
+            imageUrl: "http://192.168.18.22:3000/transferTelTool/AgACAgEAAxkBAAPSaWY1u4kNidouCMzQz5obIn6snM4AAnULaxuFMDBHrrrrrNSCAcZ1Ef2sBAAMCAANzAAM4BA"
         },
         {
             id: 2,
             title: "Cena familiar",
             date: "12 Ago 2024",
-            imageUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w-400&h=250&fit=crop"
+            imageUrl: "http://192.168.18.22:3000/transferTelTool/AgACAgEAAxkBAAPUaWY1ye5dwH6Db4bOAAEfFwG6mjipAAJ2C2sbhTAwR6y6tGiKM93mAQADAgADcwADOAQ"
         },
         {
             id: 3,
@@ -136,23 +173,23 @@ const samplePhotosByMonth = {
 const tutorialSteps = [
     {
         id: 1,
-        title: "Verificar conexión a internet",
-        description: "Asegúrate de que tu dispositivo esté conectado a una red estable con acceso a internet.",
+        title: "Buscar el BOT 'tooltipBot' o '@tooltipIAPBot'",
+        description: "Busca el BOT 'tooltipBot' en Telegram y úsalo para iniciar sesión.",
         icon: "wifi",
         screenContent: `
              
-            <img src="recursos/imagenes/tooltipnewBot.png" alt="Configuración WiFi" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+            <img src="recursos/imagenes/tooltipPaso1.png" alt="Configuración WiFi" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
            
         `
     },
     {
         id: 2,
-        title: "Reiniciar la aplicación",
-        description: "Cierra completamente la app y ábrela nuevamente para limpiar la memoria caché temporal.",
+        title: "Iniciar El BOT '@tooltipIAPBot'",
+        description: "Inicia el BOT '@tooltipIAPBot' en Telegram.",
         icon: "sync-alt",
         screenContent: `
-             
-            <img src="recursos/imagenes/tooltip01.png" alt="Configuración WiFi" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+
+            <img src="recursos/imagenes/tooltipnewBot.png" alt="Configuración WiFi" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
            
         `,
         screenContent2: `
@@ -169,40 +206,40 @@ const tutorialSteps = [
     },
     {
         id: 3,
-        title: "Actualizar la aplicación",
-        description: "Descarga la última versión desde la tienda oficial para corregir errores conocidos.",
+        title: "Solicitad el /id",
+        description: "Enviar el comando /id en el bot para obtener el ID del chat.",
         icon: "download",
         screenContent: `
-            <div class="step-icon"><i class="fas fa-download"></i></div>
-            <h3 class="step-demo-title">Actualizar App</h3>
-            <p class="step-demo-text">Abre la App Store o Google Play Store, busca la aplicación y toca "Actualizar" si está disponible.</p>
-            <div style="background: #f0f0f0; padding: 15px; border-radius: 12px; margin-top: 15px; text-align: left;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <span style="font-weight: 500;">Mi App</span>
-                    <button style="background: #4285f4; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem;">Actualizar</button>
-                </div>
-                <div style="font-size: 0.8rem; color: #666;">Versión 2.1.3 disponible</div>
-            </div>
+            <img src="recursos/imagenes/tooltipPaso3.png" alt="Configuración WiFi" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
         `
     },
     {
         id: 4,
-        title: "Limpiar caché de la aplicación",
-        description: "Borra los datos temporales que puedan estar causando conflictos en la aplicación.",
+        title: "Coloar el ID en la pagina, enviarlo y esperar la confirmacion del bot",
+        description: "El id otorgado por el bot debe ser colocado 👇 en la pagina, enviarlo y esperar la confirmacion del bot.",
         icon: "broom",
         screenContent: `
-            <div class="step-icon"><i class="fas fa-broom"></i></div>
-            <h3 class="step-demo-title">Limpiar Caché</h3>
-            <p class="step-demo-text">Ve a Configuración > Aplicaciones > [Tu App] > Almacenamiento > Toca "Limpiar caché".</p>
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 12px; margin-top: 15px; color: white;">
-                <div style="font-weight: 500; margin-bottom: 5px;">Almacenamiento usado: 245 MB</div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-                    <span>Caché: 120 MB</span>
-                    <button style="background: white; color: #4285f4; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">Limpiar</button>
-                </div>
-            </div>
+            <img src="recursos/imagenes/tooltipPaso4.png" alt="Configuración WiFi" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
         `
-    },
+    }
+    // {
+    //     id: 4,
+    //     title: "Limpiar caché de la aplicación",
+    //     description: "Borra los datos temporales que puedan estar causando conflictos en la aplicación.",
+    //     icon: "broom",
+    //     screenContent: `
+    //         <div class="step-icon"><i class="fas fa-broom"></i></div>
+    //         <h3 class="step-demo-title">Limpiar Caché</h3>
+    //         <p class="step-demo-text">Ve a Configuración > Aplicaciones > [Tu App] > Almacenamiento > Toca "Limpiar caché".</p>
+    //         <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 12px; margin-top: 15px; color: white;">
+    //             <div style="font-weight: 500; margin-bottom: 5px;">Almacenamiento usado: 245 MB</div>
+    //             <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+    //                 <span>Caché: 120 MB</span>
+    //                 <button style="background: white; color: #4285f4; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">Limpiar</button>
+    //             </div>
+    //         </div>
+    //     `
+    // },
     // {
     //     id: 5,
     //     title: "Contactar con soporte técnico",
@@ -235,33 +272,34 @@ async function callApi() {
         loadingScreen.classList.remove('hidden');
 
         // Simular delay de red
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        // await new Promise(resolve => setTimeout(resolve, 1500));
+        await verificarHabilitacion()
 
         // SIMULACIÓN: Para probar ambos casos, cambia este valor
-        const forceError = false; // Cambiar a true para ver la interfaz de error
+        // const forceError = false; // Cambiar a true para ver la interfaz de error
 
-        // Simular respuesta de API
-        const response = forceError ?
-            {
-                ok: false,
-                status: 400,
-                message: "Error de configuración detectado. El servidor no puede procesar tu solicitud."
-            } :
-            {
-                ok: true,
-                status: 200,
-                data: samplePhotosByMonth
-            };
+        // // Simular respuesta de API
+        // const response = forceError ?
+        //     {
+        //         ok: false,
+        //         status: 400,
+        //         message: "Error de configuración detectado. El servidor no puede procesar tu solicitud."
+        //     } :
+        //     {
+        //         ok: true,
+        //         status: 200,
+        //         data: samplePhotosByMonth
+        //     };
 
-        // Ocultar loading
-        loadingScreen.classList.add('hidden');
+        // // Ocultar loading
+        // loadingScreen.classList.add('hidden');
 
-        // Mostrar interfaz correspondiente
-        if (response.ok) {
-            showGooglePhotosUI(response.data);
-        } else {
-            showTutorialUI(response.message);
-        }
+        // // Mostrar interfaz correspondiente
+        // if (response.ok) {
+        //     showGooglePhotosUI(response.data);
+        // } else {
+        //     showTutorialUI(response.message);
+        // }
 
     } catch (error) {
         console.error('Error:', error);
@@ -270,16 +308,67 @@ async function callApi() {
     }
 }
 
+//Funcion verificar
+async function verificarHabilitacion() {
+    try {
+        const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.GET_VERIFICAR_HABILITACION_TEL}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                sessionCode: sessionCode,
+            }),
+        });
+        const data = await response.json();
+        if (data.estatus == 200) {
+            showGooglePhotosUI();
+            paintIdChat(data.idChat);
+
+            idchatCodeGlobal = data.idChat;
+        } else if (data.estatus == 400) {
+            localStorage.clear();
+            window.location.href = "index.html";
+            return;
+        } else if (data.estatus == 404) {
+            showTutorialUI("Usuario no registrado, inscribir codigo del chat");
+        } else {
+            showTutorialUI("Error de conexión con el servidor. Por favor, verifica tu conexión a internet.");
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        showTutorialUI("Error de conexión con el servidor. Por favor, verifica tu conexión a internet.");
+    } finally {
+        loadingScreen.classList.add('hidden');
+    }
+}
+
+
+
 // Función para mostrar interfaz Google Photos
-function showGooglePhotosUI(photosByMonth) {
+// function showGooglePhotosUI(photosByMonth) {
+//     googlePhotosUI.classList.remove('hidden');
+//     tutorialUI.classList.add('hidden');
+
+//     // Guardar datos originales para filtrado
+//     // filteredMonths = { ...photosByMonth };
+
+//     // Renderizar galería
+//     // renderMonthlyGallery(photosByMonth);
+
+//     // Inicializar controles
+//     initGalleryControls();
+// }
+
+function showGooglePhotosUI() {
     googlePhotosUI.classList.remove('hidden');
     tutorialUI.classList.add('hidden');
 
     // Guardar datos originales para filtrado
-    filteredMonths = { ...photosByMonth };
+    // filteredMonths = { ...photosByMonth };
 
     // Renderizar galería
-    renderMonthlyGallery(photosByMonth);
+    // renderMonthlyGallery(photosByMonth);
 
     // Inicializar controles
     initGalleryControls();
@@ -312,7 +401,7 @@ function renderMonthlyGallery(photosByMonth) {
             const photoCard = document.createElement('div');
             photoCard.className = 'photo-card-month';
             photoCard.innerHTML = `
-                <img src="${photo.imageUrl}" alt="${photo.title}" class="photo-img-month" loading="lazy">
+                <img src="${photo.imageUrl}" alt="${photo.title}"  onerror="this.onerror=null; this.src='recursos/imagenes/failNetwork2.png';" class="photo-img-month" loading="lazy">
                 <div class="photo-overlay">
                     <div class="photo-title-month">${photo.title}</div>
                     <div class="photo-date-month">${photo.date}</div>
@@ -331,9 +420,31 @@ function renderMonthlyGallery(photosByMonth) {
     });
 }
 
+function initFechaSelect() {
+    let hoyDia = new Date()
+
+    hoyDia.setUTCHours(hoyDia.getUTCHours() - 5)
+    fechaSeleccion.valueAsDate = hoyDia
+
+    const fecha = fechaSeleccion.value;
+    console.log(fecha);
+    getInfoDay(fecha);
+}
+
 // Función para inicializar controles de la galería
 function initGalleryControls() {
+
+
+    if (iniciadoControlsGallery) {
+        return;
+    }
+
+    iniciadoControlsGallery = true;
+    // generateMonthSelect()
     // Botones de vista
+
+    initFechaSelect();
+
     const viewButtons = document.querySelectorAll('[data-view]');
     viewButtons.forEach(button => {
         button.addEventListener('click', function () {
@@ -363,10 +474,24 @@ function initGalleryControls() {
     }
 
     // Filtro por mes
-    if (monthFilter) {
-        monthFilter.addEventListener('change', function (e) {
-            const selectedMonth = e.target.value;
-            filterByMonth(selectedMonth);
+    // if (monthFilter) {
+    //     monthFilter.addEventListener('change', function (e) {
+
+    //         const select = e.target;
+    //         const selectedOption = select.selectedOptions[0];
+
+    //         console.log(select.value);
+    //         console.log(selectedOption.textContent);
+    //         getInfoMonth(select.value, selectedOption.textContent);
+    //     });
+    // }
+
+    if (fechaSeleccion) {
+        fechaSeleccion.addEventListener('change', function (e) {
+            const fecha = e.target.value;
+            console.log(fecha);
+            getInfoDay(fecha);
+
         });
     }
 
@@ -400,13 +525,66 @@ function initGalleryControls() {
         });
     }
 
+    //Volver
+    if (btnBack) {
+        btnBack.addEventListener('click', () => {
+            console.log("Volver");
+            window.location.href = "dashboard.html";
+        });
+    }
+
+    if (btnBackMobile) {
+        btnBackMobile.addEventListener('click', () => {
+            window.location.href = "dashboard.html";
+        });
+    }
+
+    //Recargar
+    if (btnReload) {
+        btnReload.addEventListener('click', () => {
+            console.log("Recargar");
+            // getInfoMonth(valueMonthSelect, textMonthSelect);
+            getInfoDay(valueDaySelect);
+        });
+    }
+
+
+    //DeleteID
+    if (btnDeleteIdchat) {
+        btnDeleteIdchat.addEventListener('click', async () => {
+
+            const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.POST_DELETE_IDCHAT}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    sessionCode: sessionCode,
+                    idChat: idchatCodeGlobal
+                }),
+            });
+            const data = await response.json();
+            if (data.estatus == 200 || data.estatus == 204) {
+
+                // showTutorialUI("Usuario no registrado, inscribir codigo del chat");
+                await verificarHabilitacion()
+            } else {
+                alert("Sin datos")
+                // showTutorialUI("Usuario no registrado, inscribir codigo del chat");
+            }
+
+        });
+    }
+
     // Cerrar menú al hacer clic fuera
-    document.addEventListener('click', (e) => {
-        if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-            mobileMenu.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
+    // document.addEventListener('click', (e) => {
+    //     if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+    //         mobileMenu.classList.remove('active');
+    //         document.body.style.overflow = '';
+    //     }
+    // });
+
+
 }
 
 // Función para filtrar galería por búsqueda
@@ -433,34 +611,34 @@ function filterGallery(searchTerm) {
 }
 
 // Función para filtrar por mes específico
-function filterByMonth(selectedMonth) {
-    if (selectedMonth === 'all') {
-        renderMonthlyGallery(filteredMonths);
-        return;
-    }
+// function filterByMonth(selectedMonth) {
+//     if (selectedMonth === 'all') {
+//         renderMonthlyGallery(filteredMonths);
+//         return;
+//     }
 
-    const filtered = {};
-    const monthMap = {
-        'agosto': 'Agosto 2024',
-        'julio': 'Julio 2024',
-        'junio': 'Junio 2024',
-        'mayo': 'Mayo 2024'
-    };
+//     const filtered = {};
+//     const monthMap = {
+//         'agosto': 'Agosto 2024',
+//         'julio': 'Julio 2024',
+//         'junio': 'Junio 2024',
+//         'mayo': 'Mayo 2024'
+//     };
 
-    const monthName = monthMap[selectedMonth];
-    if (monthName && filteredMonths[monthName]) {
-        filtered[monthName] = filteredMonths[monthName];
-        renderMonthlyGallery(filtered);
+//     const monthName = monthMap[selectedMonth];
+//     if (monthName && filteredMonths[monthName]) {
+//         filtered[monthName] = filteredMonths[monthName];
+//         renderMonthlyGallery(filtered);
 
-        // Scroll al mes seleccionado
-        setTimeout(() => {
-            const element = document.querySelector(`[data-month="${monthName.toLowerCase().replace(/\s+/g, '-')}"]`);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }, 100);
-    }
-}
+//         // Scroll al mes seleccionado
+//         setTimeout(() => {
+//             const element = document.querySelector(`[data-month="${monthName.toLowerCase().replace(/\s+/g, '-')}"]`);
+//             if (element) {
+//                 element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+//             }
+//         }, 100);
+//     }
+// }
 
 // Función para mostrar interfaz de tutorial
 function showTutorialUI(errorMessage) {
@@ -550,6 +728,14 @@ function updatePhoneScreen(step) {
 
 // Función para inicializar controles del tutorial
 function initTutorialControls() {
+
+
+    if (iniciadoControlsTutorial) {
+        return;
+    }
+
+    iniciadoControlsTutorial = true;
+
     // Botón continuar
     if (continueBtn) {
         continueBtn.addEventListener('click', handleContinue);
@@ -567,9 +753,7 @@ function initTutorialControls() {
     // Botón volver
     if (backButton) {
         backButton.addEventListener('click', () => {
-            if (confirm('¿Volver a intentar la conexión?')) {
-                callApi();
-            }
+            window.location.href = "dashboard.html";
         });
     }
 
@@ -578,6 +762,32 @@ function initTutorialControls() {
         feedbackTextarea.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && e.ctrlKey) {
                 handleContinue();
+            }
+        });
+    }
+
+    //SendCode
+    if (btnSend) {
+        btnSend.addEventListener('click', async () => {
+
+            let contentTxt = feedbackTextarea.value
+
+            const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.POST_ADD_IDCHAT}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    sessionCode: sessionCode,
+                    idChat: contentTxt
+                }),
+            });
+            const data = await response.json();
+            if (data.estatus == 200 || data.estatus == 204) {
+                await verificarHabilitacion()
+            } else {
+                alert("Error al Verificar ID CHAT | Verifique el ID CHAT")
+                // showTutorialUI("Usuario no registrado, inscribir codigo del chat");
             }
         });
     }
@@ -615,7 +825,7 @@ function handleContinue() {
         if (nextIndex < tutorialSteps.length) {
             selectTutorialStep(tutorialSteps[nextIndex], nextIndex);
         } else {
-            alert('¡Has completado todos los pasos! Si el problema persiste, contacta a soporte técnico.');
+            alert('¡Has completado todos los pasos! Si no pudiste conectar el Bot, contacta a soporte técnico.');
         }
     }
 }
@@ -651,9 +861,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Actualizar overlay cuando se abre/cierra menú
-    menuToggle.addEventListener('click', () => {
-        overlay.classList.add('active');
-    });
+    // menuToggle.addEventListener('click', () => {
+    //     overlay.classList.add('active');
+    // });
 
     closeMenu.addEventListener('click', () => {
         overlay.classList.remove('active');
@@ -716,4 +926,272 @@ if ('IntersectionObserver' in window) {
             imageObserver.observe(img);
         });
     });
+}
+
+// Generar meses seleccionables
+// function generateMonthSelect() {
+//     let today = new Date();
+//     // const monthSelect = document.getElementById('month-select');
+//     let monthsSelect = []
+//     const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+//     for (let i = 0; i < 12; i++) {
+//         monthsSelect.push({
+//             value: `${i}-${today.getFullYear() - 1}`,
+//             text: `${months[i]} - ${today.getFullYear() - 1}`
+//         });
+//     }
+//     for (let i = 0; i <= today.getMonth(); i++) {
+//         monthsSelect.push({
+//             value: `${i}-${today.getFullYear()}`,
+//             text: `${months[i]} - ${today.getFullYear()}`
+//         });
+//     }
+//     monthsSelect = monthsSelect.reverse()
+//     console.log(monthsSelect);
+
+//     monthsSelect.forEach(month => {
+//         const option = document.createElement('option');
+//         option.value = month.value;
+//         option.textContent = month.text;
+//         monthFilter.appendChild(option);
+//     });
+
+//     getInfoMonth(monthsSelect[0].value, monthsSelect[0].text)
+// }
+
+async function getInfoDay(dateDayString) {
+    try {
+
+        valueDaySelect = dateDayString;
+        const arrayDate = dateDayString.split('-');
+        let textDaySelect = `${arrayDate[2]}/${arrayDate[1]}/${arrayDate[0]}`;
+
+        const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.GET_OBTENER_DOCUMENTOS_DAY_TEL}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                sessionCode: sessionCode,
+                dateDay: textDaySelect
+            }),
+        });
+        const data = await response.json();
+        if (data.estatus == 200) {
+            // console.log(data);
+            let dataObtenida = data.data
+            if (dataObtenida && dataObtenida.length > 0) {
+                dataObtenida = dataObtenida.reverse();
+            }
+            paintFiles(dataObtenida, textDaySelect);
+            // showGooglePhotosUI(samplePhotosByMonth);
+        } else if (data.estatus == 204) {
+            paintFiles([], textDaySelect);
+            // alert("Sin datos")
+            // showTutorialUI("Usuario no registrado, inscribir codigo del chat");
+        } else if (data.estatus == 400) {
+            localStorage.clear();
+            window.location.href = "index.html";
+            return;
+        } else if (data.estatus == 404) {
+            showTutorialUI("Usuario no registrado, inscribir codigo del chat");
+        } else {
+            showTutorialUI("Error de conexión con el servidor. Por favor, verifica tu conexión a internet.");
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert("Error !!!!!! de conexión con el servidor. Por favor, verifica tu conexión a internet.");
+        // showTutorialUI("Error de conexión con el servidor. Por favor, verifica tu conexión a internet.");
+    } finally {
+        // loadingScreen.classList.add('hidden');
+    }
+}
+
+// async function getInfoMonth(value, monthText) {
+//     try {
+
+//         valueMonthSelect = value;
+//         textMonthSelect = monthText;
+
+//         const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.GET_OBTENER_DOCUMENTOS_TEL}`, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify({
+//                 sessionCode: sessionCode,
+//                 dateRange: value
+//             }),
+//         });
+//         const data = await response.json();
+//         if (data.estatus == 200) {
+//             // console.log(data);
+//             let dataObtenida = data.data
+//             if (dataObtenida && dataObtenida.length > 0) {
+//                 dataObtenida = dataObtenida.reverse();
+//             }
+//             paintFiles(dataObtenida, monthText);
+//             // showGooglePhotosUI(samplePhotosByMonth);
+//         } else {
+//             alert("Sin datos")
+//             // showTutorialUI("Usuario no registrado, inscribir codigo del chat");
+//         }
+//     } catch (error) {
+//         console.error('Error:', error);
+//         alert("Error de conexión con el servidor. Por favor, verifica tu conexión a internet.");
+//         // showTutorialUI("Error de conexión con el servidor. Por favor, verifica tu conexión a internet.");
+//     } finally {
+//         // loadingScreen.classList.add('hidden');
+//     }
+// }
+
+function paintIdChat(idChat) {
+    idchatCode.textContent = idChat;
+}
+
+function paintFiles(files, month) {
+    monthlyGallery.innerHTML = '';
+    console.log("innerHTML");
+
+    const monthSection = document.createElement('div');
+    monthSection.className = 'month-section';
+
+    monthSection.innerHTML = `
+        <div class="month-header">
+            <div class="month-title">
+                <i class="fas fa-calendar"></i>
+                ${month}
+            </div>
+            <div class="month-count">${files.length} ${files.length === 1 ? 'archivo' : 'archivos'}</div>   
+        </div>
+        <div class="photos-grid-month"></div>
+    `;
+
+    const grid = monthSection.querySelector('.photos-grid-month');
+
+    files.forEach(file => {
+
+        let image = "";
+        if (file.file_id_thum_img && file.file_id_thum_img != "") {
+            image = `${API_CONFIG.BASE_URL_PROXY}/transferTelTool/${file.file_id_thum_img}?user=${nombreSessionCode}&size=${file.file_size_thum_img}&type=jpg`
+
+            console.log(image);
+        } else {
+            image = "recursos/imagenes/backgroundFile.png"
+        }
+        // switch (file.type_master) {
+        //     case "DOCUMENT":
+        //     // switch (file.type_specific) {
+        //     //     case "pdf":
+
+        //     //         break;
+        //     //     case "json":
+
+        //     //         break;
+        //     //     case "jpg":
+
+        //     //         break;
+        //     //     case "png":
+
+        //     //         break;
+        //     //     default:
+        //     //         break;
+        //     // }
+        //     // break;
+        //     case "IMG":
+
+        //         break;
+        //     case "VIDEO":
+
+        //         break;
+        //     default:
+        //         break;
+        // }
+
+        const photoCard = document.createElement('div');
+        photoCard.className = 'photo-card-month';
+
+        const imagenHTML = document.createElement('img');
+        imagenHTML.src = image;
+        imagenHTML.alt = file.file_nombre;
+        imagenHTML.className = 'photo-img-month';
+        imagenHTML.loading = 'lazy';
+        // imagenHTML.onerror = function () {
+        //     console.log("Error al cargar la imagen");
+        //     this.onerror = null;
+        //     this.src = ""
+        //     this.src = 'recursos/imagenes/failNetwork2.png';
+        //     this.alt = "Error al cargar la imagen";
+        //     console.log("Error al cargar la imagen 2");
+        //     setTimeout(() => {
+        //         this.setAttribute("src", "recursos/imagenes/failNetwork2.png");
+        //     }, 0);
+
+        // };
+        // imagenHTML.onerror = function () {
+        //     const nuevaImg = document.createElement("img");
+        //     nuevaImg.src = "recursos/imagenes/failNetwork2.png";
+        //     nuevaImg.alt = "Error al cargar la imagen";
+        //     nuevaImg.className = this.className;
+
+        //     this.replaceWith(nuevaImg);
+        // };
+        imagenHTML.setAttribute(
+            "onerror",
+            "this.onerror=null; this.src='recursos/imagenes/failNetwork2.png';"
+        );
+
+        photoCard.appendChild(imagenHTML);
+
+        photoCard.innerHTML += `
+                <div class="photo-overlay">
+                    <div class="icon-file">
+                        <i class="fa-solid fa-circle-arrow-down  fa-2x"></i>
+                    </div>
+                    <div class="photo-title-month">${file.file_size_text} - ${file.type_specific}</div>
+                    <div class="photo-title-month">${file.file_nombre}.${file.type_specific}</div>
+                </div>
+            `;
+
+
+        photoCard.addEventListener('click', () => {
+
+
+
+            // alert(`Ver foto:`);
+            const link = document.createElement('a');
+            let linkDescarga = `${API_CONFIG.BASE_URL_PROXY}/transferTelTool/${file.file_id}?user=${nombreSessionCode}&size=${file.file_size_text}&type=${file.type_specific}&nameFull=${file.file_nombre.replaceAll(" ", "+")}.${file.type_specific}`;
+
+            console.log(linkDescarga)
+            // link.download = 'documento.pdf';
+
+            link.href = linkDescarga;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+
+
+            // downloadFile(linkDescarga, file.file_nombre);
+
+
+            // descargaFileApi(`${file.file_nombre}.${file.type_specific}`, linkDescarga, document)
+
+
+        });
+
+        grid.appendChild(photoCard);
+        // html += `<div class="photo-item">
+        //             <img src="${file.url}" alt="${file.name}" class="photo">
+        //             <div class="photo-info">
+        //                 <p class="photo-title">${file.name}</p>
+        //                 <p class="photo-date">${file.date}</p>
+        //             </div>
+        //         </div>`;
+    });
+    // photosGrid.innerHTML = html;
+    monthlyGallery.appendChild(monthSection);
 }
